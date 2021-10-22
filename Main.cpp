@@ -5,10 +5,12 @@
 #include "ModularPower.h"
 #include "TranscriptorMessage.h"
 
+#include "PrimeGenerator.h"
+
 using namespace std;
 
 int main() {
-    //Inicializa a semente da função aleatória
+     //Inicializa a semente da função aleatória
     srand(time(0));
 
     string entry, aux;
@@ -31,7 +33,7 @@ int main() {
         aux += enc[i];
         aux += enc[i + 1];
 
-        msgInRSA.push_back(exponentMod(stoi(aux), e, n));
+        msgInRSA.push_back(modPow(stoi(aux), e, n));
 
         aux = "";
     }
@@ -42,12 +44,13 @@ int main() {
     cout << endl;
 
     // Mensagem é descriptografada 
-    for (auto v : msgInRSA) {
-        msgReversed.push_back(exponentMod(v, d, n));
+    for (auto num : msgInRSA) {
+        msgReversed.push_back(modPow(num, d, n));
     }
 
     // Decodames a mensagem
-    cout << "Mensagem descriptografada: " << decode(msgReversed) << endl;
+    cout << "Mensagem descriptografada: " << decode(msgReversed) << endl; 
+
     return 0;
 }
 

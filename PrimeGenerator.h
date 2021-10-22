@@ -7,12 +7,17 @@
 
 #include "ModularPower.h"
 
-// Gerador de números pseudo-aleatórios
-long long genRandomNumberOfNBits(int n) {
-    long long min = pow(2, n - 1) + 1;
-    long long range = pow(2, n) - 1 - min;
+#include <iostream>
 
-    return (rand() % range + 1) + min;
+using namespace std;
+
+// Gerador de números pseudo-aleatórios (restrito a 32 bits signed)
+int genRandomNumberOfNBits(int n) {
+    int min = pow(2, n - 2) + 1;
+    min *= 1.2; // Vamos aumentar o mínimo em 20% reduzindo o intervalo
+    int range = pow(2, n-1) - 1 - min;
+
+    return (rand() % range+1) + min;
 }
 
 /*
@@ -20,7 +25,7 @@ long long genRandomNumberOfNBits(int n) {
 * utilizando p como o pseudoprimo gerado e a como os primos conhecidos até 659,
 * pois se dois números são primos também são coprimos, o contrário não é verdadeiro.
 */
-bool verifyPrime(long long possiblePrime) {
+bool verifyPrime(int possiblePrime) {
     unsigned int initialPrimes[] = { 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,
     59,61,67,71, 73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,
     163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,
@@ -33,7 +38,7 @@ bool verifyPrime(long long possiblePrime) {
     long long a;
 
     for (int i = 0; i < primesLength; i++) {
-        a = exponentMod(initialPrimes[i], possiblePrime - 1, possiblePrime);
+        a = modPow(initialPrimes[i], possiblePrime - 1, possiblePrime);
 
         if (a != 1) return false;
     }
@@ -42,7 +47,7 @@ bool verifyPrime(long long possiblePrime) {
 }
 
 // Retorna um número de n bits que provavelmente é primo
-long long genPrimeOfNBits(int n) {
+int genPrimeOfNBits(int n) {
     long long num;
 
     do {
