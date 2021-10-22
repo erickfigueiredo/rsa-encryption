@@ -1,3 +1,6 @@
+#ifndef PrimeGenerator
+#define PrimeGenerator
+
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
@@ -8,9 +11,8 @@
 unsigned int genRandomNumberOfNBits(int n) {
     unsigned int min = pow(2, n - 1) + 1;
     unsigned int range = pow(2, n) - 1 - min;
-    srand(time(NULL));
 
-    unsigned int randomNumber = (rand() % min + 1) + range;
+    unsigned int randomNumber = (rand() % range + 1) + min;
 
     return randomNumber;
 }
@@ -37,6 +39,7 @@ bool verifyPrime(unsigned int possiblePrime) {
 
         if(a != 1) return false;
     }
+
     return true;
 }
 
@@ -50,3 +53,5 @@ unsigned int genPrimeOfNBits(int n) {
 
     return num;
 }
+
+#endif
