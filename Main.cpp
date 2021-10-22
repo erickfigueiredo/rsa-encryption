@@ -17,14 +17,14 @@ int main() {
     vector<long long> msgInRSA;
     vector<int> msgReversed;
 
+    cout << "Informe a mensagem: ";
     cin >> entry;
 
     // Gera as chaves e atribui para os valores passados por referência
     genKeys(n, e, d);
     // Pega a string retornada e devolve encodada
-    string enc = encode(entry);
 
-    cout << n << " " << enc << endl;
+    string enc = encode(entry);
 
     // Mensagem entry é criptografada
     for (int i = 0; i < enc.length(); i += 2) {
@@ -36,13 +36,18 @@ int main() {
         aux = "";
     }
 
+    // Apenas demonstrativo
+    cout << "Mensagem criptografada: ";
+    for(const long long num: msgInRSA) cout << num;
+    cout << endl;
+
     // Mensagem é descriptografada 
     for (auto v : msgInRSA) {
         msgReversed.push_back(exponentMod(v, d, n));
     }
 
     // Decodames a mensagem
-    cout << decode(msgReversed) << endl;
+    cout << "Mensagem descriptografada: " << decode(msgReversed) << endl;
     return 0;
 }
 
