@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-void genKeys() {
+void genKeys(long long &a, long long &b, long long &c) {
 
     // Teremos dois números 2^16 => (2^16)^2 => 2^23, teremos um número de 32 bits
     long long p = genPrimeOfNBits(16);
@@ -29,6 +29,11 @@ void genKeys() {
 
     std::cout << "Chave Publica  n:" << n << " e:" << e << std::endl;
     std::cout << "Chave Privada d: " << s << std::endl;
+
+    //Retornamos os valores na referencia para evitar retornar um array
+    a = n;
+    b = e;
+    c = s;
 }
 
 #endif

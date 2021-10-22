@@ -2,7 +2,6 @@
 #define TRANSCRIPTOR_MESSAGE
 
 #include <map>
-#include <string>
 
 using namespace std;
 
@@ -27,17 +26,13 @@ string encode(const string& entry) {
     return entry;
 }
 
-string decode(const string& entry) {
-    map <string, char> alphabet = {{"00", 'A'}, {"01", 'B'}, {"02", 'C'}, {"03", 'D'}, {"04", 'E'}, {"05", 'F'}, {"06", 'G'},
-        {"07", 'H'}, {"08", 'I'}, {"09", 'J'}, {"10", 'K'}, {"11", 'L'}, {"12", 'M'}, {"13", 'N'}, {"14", 'O'}, {"15", 'P'},
-        {"16", 'Q'}, {"17", 'R'}, {"18", 'S'}, {"19", 'T'}, {"20", 'U'}, {"21", 'V'}, {"22", 'W'}, {"23", 'X'}, {"24", 'Y'},
-        {"25", 'Z'}};
-
-    map<string, char>::iterator it;
+string decode(const vector<int>& entry) {
+    char alphabet[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    'U', 'V', 'W', 'X', 'Y', 'Z' };
 
     string decodedEntry;
 
-    // Fazemos a decodificação da mensagem;
+    for (const int i : entry) decodedEntry += alphabet[i];
 
     return decodedEntry;
 }

@@ -1,0 +1,7 @@
+UNIVERSIDADE FEDERAL DE VIÇOSA (UFV)
+
+MAT. DISCRETA - INF230
+PROFESSOR: André Gustavo
+
+ALUNOS: Erick Lima Figueiredo e Sávio Mendes Miranda
+MATRICULAS: 98898 e 98886       Data: XX/10/2021
