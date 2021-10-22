@@ -1,8 +1,8 @@
-#ifndef EuclidesAlgorithm
-#define EuclidesAlgorithm
+#ifndef EUCLIDES_ALGORITHM
+#define EUCLIDES_ALGORITHM
 
-unsigned int euclidesDefault(unsigned long long n1, unsigned long long n2) {
-    unsigned int res = n1 % n2;
+long long euclidesDefault(long long n1, long long n2) {
+    long long res = n1 % n2;
     
     if(res == 1) return res;// Poupa +1 chamada desnecessária
     if(res == 0) return n2; // retorna o divisor
@@ -10,12 +10,12 @@ unsigned int euclidesDefault(unsigned long long n1, unsigned long long n2) {
     return euclidesDefault(n2, res);
 }
 
-unsigned int euclidesExtended(unsigned long long n1, unsigned long long n2, unsigned long long &s, unsigned long long &t) {
+long long euclidesExtended(long long n1, long long n2, long long &s, long long &t) {
     s = 1;
     t = 0;
 
-    unsigned long long newS = 0, newT = 1;
-    unsigned long long aux, q;
+    long long newS = 0, newT = 1;
+    long long aux, q;
 
     do {
         q = (unsigned int) n1 / n2;

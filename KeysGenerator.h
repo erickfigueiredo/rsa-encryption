@@ -1,41 +1,34 @@
-#ifndef KeysGenerator
-#define KeysGenerator
+#ifndef KEYS_GENERATOR
+#define KEYS_GENERATOR
 
 #include "PrimeGenerator.h"
 #include "EuclidesAlgorithm.h"
 
 #include <iostream>
 
-int genKeys() {
+void genKeys() {
 
-    // Teremos dois números 2^32 => (2^32)^2 => 2^64, teremos um número de 64 bits
-    unsigned int p = genPrimeOfNBits(32);
-    unsigned int q = genPrimeOfNBits(32);
-    unsigned long long s, t;
+    // Teremos dois números 2^16 => (2^16)^2 => 2^23, teremos um número de 32 bits
+    long long p = genPrimeOfNBits(16);
+    long long q = genPrimeOfNBits(16);
+    long long s, t;
 
-    unsigned long long n = (unsigned long long) p * q ;
-    unsigned long long fi = (unsigned long long) (p-1) * (q-1);
-
-    std::cout << "p: " << p << " q:" << q << " n:" << n << " fi:" << fi << std::endl;
+    long long n = p * q;
+    long long fi = (p - 1) * (q - 1);
 
     // temos que gerar um e, de modo que mdc (e, fi) = 1 
-    unsigned int e;
+    long long e;
 
-    do{
+    do {
         // Gera números até que encontre um coprimo à fi
-        e = genRandomNumberOfNBits(32); // Não sei se precisa ser de 32 bits 
-    }while(euclidesDefault(fi, e) != 1); // Pode mudar para extended
-
-    // Calcular o inverso de e mod fi (euclides estendido)
-    euclidesExtended(e, fi, s, t);
+        e = genRandomNumberOfNBits(16);
+    } while (euclidesExtended(e, fi, s, t) != 1);
 
     // d é o coeficiente de bézout de e, no caso s
-    std::cout << "s: " << s << " t: " << t << std::endl;
-    if(s < 0) s += fi;
+    if (s < 0) s += fi;
 
-    // d é a chave publica
-
-    return 0; 
+    std::cout << "Chave Publica  n:" << n << " e:" << e << std::endl;
+    std::cout << "Chave Privada d: " << s << std::endl;
 }
 
 #endif

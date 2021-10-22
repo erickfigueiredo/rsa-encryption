@@ -1,5 +1,5 @@
-#ifndef PrimeGenerator
-#define PrimeGenerator
+#ifndef PRIME_GENERATOR
+#define PRIME_GENERATOR
 
 #include <cmath>
 #include <ctime>
@@ -7,14 +7,12 @@
 
 #include "ModularPower.h"
 
-// Gera números de até 32 bits
-unsigned int genRandomNumberOfNBits(int n) {
-    unsigned int min = pow(2, n - 1) + 1;
-    unsigned int range = pow(2, n) - 1 - min;
+// Gerador de números pseudo-aleatórios
+long long genRandomNumberOfNBits(int n) {
+    long long min = pow(2, n - 1) + 1;
+    long long range = pow(2, n) - 1 - min;
 
-    unsigned int randomNumber = (rand() % range + 1) + min;
-
-    return randomNumber;
+    return (rand() % range + 1) + min;
 }
 
 /*
@@ -22,7 +20,7 @@ unsigned int genRandomNumberOfNBits(int n) {
 * utilizando p como o pseudoprimo gerado e a como os primos conhecidos até 659,
 * pois se dois números são primos também são coprimos, o contrário não é verdadeiro.
 */
-bool verifyPrime(unsigned int possiblePrime) {
+bool verifyPrime(long long possiblePrime) {
     unsigned int initialPrimes[] = { 2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,
     59,61,67,71, 73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,
     163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,
@@ -32,20 +30,20 @@ bool verifyPrime(unsigned int possiblePrime) {
     619,631,641,643,647,653,659 };
 
     int primesLength = sizeof(initialPrimes) / sizeof(int);
-    unsigned int a;
+    long long a;
 
-    for(int i = 0; i < primesLength; i++){
-        a = exponentMod(initialPrimes[i], possiblePrime-1, possiblePrime);
+    for (int i = 0; i < primesLength; i++) {
+        a = exponentMod(initialPrimes[i], possiblePrime - 1, possiblePrime);
 
-        if(a != 1) return false;
+        if (a != 1) return false;
     }
 
     return true;
 }
 
 // Retorna um número de n bits que provavelmente é primo
-unsigned int genPrimeOfNBits(int n) {
-    unsigned int num;
+long long genPrimeOfNBits(int n) {
+    long long num;
 
     do {
         num = genRandomNumberOfNBits(n);
