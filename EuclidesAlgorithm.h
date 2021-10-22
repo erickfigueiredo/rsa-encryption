@@ -34,6 +34,7 @@ unsigned int euclidesExtended(unsigned int n1, unsigned int n2, int &s, int &t) 
 
         n1 = n2;
         n2 = aux; 
+        
     } while(true);
 }
 
