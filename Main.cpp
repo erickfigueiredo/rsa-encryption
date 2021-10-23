@@ -27,7 +27,7 @@ int main() {
     // Pega a string retornada e devolve encodada
 
     string enc = encode(entry);
-
+    cout << enc << endl;
     // Mensagem entry é criptografada
     for (int i = 0; i < enc.length(); i += 2) {
         aux += enc[i];

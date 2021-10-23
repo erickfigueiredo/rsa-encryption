@@ -18,7 +18,7 @@ long long euclidesExtended(long long n1, long long n2, long long &s, long long &
     long long aux, q;
 
     do {
-        q = (unsigned int) n1 / n2;
+        q = (long long) n1 / n2;
 
         aux = s-(newS * q);
         s = newS;

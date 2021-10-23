@@ -1,7 +1,8 @@
+// Algoritmo recursivo para calcular Exponenciação Modular Rápida  
+// Baseado em algoritmo disponível em: https://blog.emptyq.net/a?id=00012-cfb2d726-e395-41ed-a840-0401bfb4f0be
+
 #ifndef MODULAR_POWER
 #define MODULAR_POWER
-// Algoritmo recursivo para calcular Exponenciação Modular Rápida  
-// Baseado em algoritmo disponível em: https://blog.emptyq.net/base?id=00012-cfb2d726-e395-41ed-base840-0401bfb4f0be
 
 // Terminar de comentar o código
 long long modPow( long long base, long long exp, long long mod) {
