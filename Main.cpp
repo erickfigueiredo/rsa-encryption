@@ -81,14 +81,26 @@ void encoding(){
 }
 
 void decoding(){
-    long long d;
-    vector<long long> msgInRSA;
+    long long d, n;
+    vector<long long> msg;
     vector<int> msgReversed;
 
     string entry;
-    cout << "Informe a mensagem: ";
-    cin >> entry;
+    cout << "Informe a mensagem criptografada: ";
+    while(cin >> entry){
+        msg.push_back(stoi(entry));
+    }
 
     cout << "Informe a chave privada: ";
     cin >> d;
+
+    cout << "informe o N público: ";
+    cin >> n;
+
+    for (auto num : msg) {
+        msgReversed.push_back(modPow(num, d, n));
+    }
+
+    // Decodames a mensagem
+    cout << "Mensagem descriptografada: " << decode(msgReversed) << endl; 
 }
