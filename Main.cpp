@@ -9,10 +9,38 @@
 
 using namespace std;
 
+void encoding();
+void decoding();
+void sign();
+
 int main() {
      //Inicializa a semente da função aleatória
     srand(time(0));
 
+    cout << "Olá, escolha a operação desejada:\n\n";
+    cout << "1) Codificação\n";
+    cout << "2) Decodificação\n";
+    cout << "3) Assinatura\n\n";
+
+    int option;
+    cin >> option;
+
+    switch (option){
+        case 1:
+            encoding();
+            break;
+        case 2:
+            decoding();
+            break;
+        case 3:
+            sign();
+            break;
+    }
+
+    return 0;
+}
+
+void encoding(){
     string entry, aux;
 
     long long n, e, d, cod;
@@ -50,7 +78,17 @@ int main() {
 
     // Decodames a mensagem
     cout << "Mensagem descriptografada: " << decode(msgReversed) << endl; 
-
-    return 0;
 }
 
+void decoding(){
+    long long d;
+    vector<long long> msgInRSA;
+    vector<int> msgReversed;
+
+    string entry;
+    cout << "Informe a mensagem: ";
+    cin >> entry;
+
+    cout << "Informe a chave privada: ";
+    cin >> d;
+}
