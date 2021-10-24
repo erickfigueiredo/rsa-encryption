@@ -19,11 +19,7 @@ int main() {
      //Inicializa a semente da função aleatória
     srand(time(0));
 
-    cout << "Ola, escolha a operacao desejada:\n\n";
-    cout << "1) Codificacao\n";
-    cout << "2) Decodificacao\n";
-    cout << "3) Assinar mensagem\n\n";
-    cout << "4) Verificar assinatura\n\n";
+    cout << "Ola, escolha a operacao desejada:\n\n1) Codificacao\n2) Decodificacao\n3) Assinar mensagem\n4) Verificar assinatura\n\nOpcao: ";
 
     int option;
     cin >> option;
