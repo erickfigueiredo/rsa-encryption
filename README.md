@@ -11,6 +11,6 @@
 
 ### Descrição:
 
-Implementação da técnica de criptografia RSA, com operações limitadas ao teto de 64 bits em inteiro (long long signed)
+Implementação da técnica de criptografia RSA, com operações limitadas ao teto de 64 bits em inteiro (long long signed).
 
 
