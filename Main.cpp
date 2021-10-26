@@ -11,6 +11,7 @@
 using namespace std;
 
 void encoding();
+void encodingRead(long long &n, long long &e, long long &d);
 void decoding();
 void sign();
 void validateSign();
@@ -44,18 +45,31 @@ int main() {
 
 void encoding(){
     string entry, aux;
-
     long long n, e, d, cod;
     vector<long long> msgInRSA;
     vector<int> msgReversed;
 
+    int option;
+
+    cout << "Gostaria de gerar n, e, d? 0) Nao - 1) Sim" << endl;
+    cin >> option;
+
+    switch(option){
+        case 1:
+            genKeys(n, e, d);
+            break;
+        case 0:
+            encodingRead(n, e, d);
+            break;
+            default:
+                return;
+                break;
+    }
+
     cout << "Informe a mensagem: ";
     cin >> entry;
 
-    // Gera as chaves e atribui para os valores passados por referência
-    genKeys(n, e, d);
     // Pega a string retornada e devolve encodada
-
     string enc = encode(entry);
     cout << "Mensagem encodada: " << enc << endl;
     // Mensagem entry é criptografada
@@ -80,6 +94,19 @@ void encoding(){
 
     // Decodames a mensagem
     cout << "Mensagem descriptografada: " << decode(msgReversed) << endl; 
+}
+
+void encodingRead(long long &n, long long &e, long long &d){
+    cout << "Informe a chave privada: ";
+    cin >> d;
+
+    cout << "Informe o n: ";
+    cin >> n;
+
+    cout << "Informe o e: ";
+    cin >> e;
+
+    return;
 }
 
 void decoding(){
