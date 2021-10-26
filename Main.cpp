@@ -22,7 +22,7 @@ int main() {
     cout << "Ola, escolha a operacao desejada:\n\n";
     cout << "1) Codificacao\n";
     cout << "2) Decodificacao\n";
-    cout << "3) Assinar mensagem\n\n";
+    cout << "3) Assinar mensagem\n";
     cout << "4) Verificar assinatura\n\n";
 
     int option;
@@ -61,7 +61,7 @@ void encoding(){
     // Pega a string retornada e devolve encodada
 
     string enc = encode(entry);
-    cout << enc << endl;
+    cout << "Mensagem encodada: " << enc << endl;
     // Mensagem entry é criptografada
     for (int i = 0; i < enc.length(); i += 2) {
         aux += enc[i];
@@ -144,22 +144,20 @@ void validateSign(){
 
     cout << "Informe a mensagem esperada: ";
     cin >> entry;
-
     cout << "Informe a mensagem assinada: ";
     cin >> sign;
 
-    cout << "Informe o e para verificar a procedencia: ";
+    cout << "Informe o e para verificar a assinatura: ";
     cin >> e;
-    cout << "Informe o n para verificar a procedencia: ";
+    cout << "Informe o n para verificar a assinatura: ";
     cin >> n;
 
     string hash = encode(entry);
-    cout << "hash " << hash << endl;
+    cout << "Hash esperado " << hash << endl;
     // Mensagem entry é assinada
     long long hashSign = modPow(stoi(sign), e, n);
-    //string r = decode()
 
-    cout << "hashSign " << hashSign << endl;
+    cout << "Hash da assinatura " << hashSign << endl;
 
     cout << "Assinatura valida: " << (hash == to_string(hashSign)) ? "Sim!" : "Nao";
 }
