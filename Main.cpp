@@ -155,5 +155,7 @@ void validateSign(){
 
     cout << "Hash da assinatura " << hashSign << endl;
 
-    cout << "Assinatura valida: " << (hash == to_string(hashSign)) ? "Sim!" : "Nao";
+    string valid = (hash == to_string(hashSign)) ? "Sim!" : "Nao!";
+
+    cout << "Assinatura valida: " << valid;
 }
