@@ -1,9 +1,0 @@
-TAREFAS:
-
-- Escolher 2 primos grandes;
-- Calcular n = pq (n deve ter até 32 bits);
-- n deve ter um valor entre 1 e 2 bilhões
-- Calcular fi = (p-1)*(q-1);
-- Escolher e, de modo que e = mdd(e, fi) = 1;
-- Obter d com o algoritmo de euclides estendido;
-- 
