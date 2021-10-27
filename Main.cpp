@@ -15,12 +15,13 @@ void encodingRead(long long &n, long long &e, long long &d);
 void decoding();
 void sign();
 void validateSign();
+void generateMessage();
 
 int main() {
      //Inicializa a semente da função aleatória
     srand(time(0));
 
-    cout << "Ola, escolha a operacao desejada:\n\n1) Codificacao\n2) Decodificacao\n3) Assinar mensagem\n4) Verificar assinatura\n\nOpcao: ";
+    cout << "Ola, escolha a operacao desejada:\n\n1) Codificacao\n2) Decodificacao\n3) Assinar mensagem\n4) Verificar assinatura\n5) Gerar mensagem dado n, e\n\nOpcao: ";
 
     int option;
     cin >> option;
@@ -37,6 +38,9 @@ int main() {
             break;
         case 4:
             validateSign();
+            break;
+        case 5:
+            generateMessage();
             break;
     }
 
@@ -115,7 +119,7 @@ void decoding(){
     vector<int> msgReversed;
 
     string entry;
-    cout << "Informe a mensagem criptografada separando as cifras por espaço, para finalizar a entrada digite -1: ";
+    cout << "Informe a mensagem criptografada separando as cifras por espaco, para finalizar a entrada digite -1: ";
     while(cin >> entry && entry != "-1"){
         msg.push_back(stoi(entry));
     }
@@ -185,4 +189,35 @@ void validateSign(){
     string valid = (hash == to_string(hashSign)) ? "Sim!" : "Nao!";
 
     cout << "Assinatura valida: " << valid;
+}
+
+void generateMessage(){
+    string entry, aux;
+    long long n, e;
+    vector<long long> msgInRSA;
+
+    cout << "Informe o e: ";
+    cin >> e;
+    cout << "Informe o n: ";
+    cin >> n;
+    cout << "Informe a mensagem: ";
+    cin >> entry;
+
+    string enc = encode(entry);
+    cout << "Mensagem encodada: " << enc << endl;
+    // Mensagem entry é criptografada
+    for (int i = 0; i < enc.length(); i += 2) {
+        aux += enc[i];
+        aux += enc[i + 1];
+
+        msgInRSA.push_back(modPow(stoi(aux), e, n));
+
+        aux = "";
+    }
+
+    // Apenas demonstrativo
+    cout << "Mensagem criptografada: ";
+    for(const long long num: msgInRSA) cout << num << " ";
+    cout << endl;
+
 }
