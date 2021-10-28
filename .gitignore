@@ -1,4 +1,4 @@
 
-a.exe
+*.exe
 .vscode/settings.json
 *.gch

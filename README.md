@@ -4,7 +4,7 @@
 ---
 **Alunos**: Erick Lima Figueiredo e Sávio Mendes Miranda
 **Matrículas**: 98898 e 98886       
-**Data:** XX/10/2021
+**Data:** 27/10/2021
 
 **Disciplina:** MAT. DISCRETA - INF230
 **PROFESSOR:** André Gustavo
