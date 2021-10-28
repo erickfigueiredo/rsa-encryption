@@ -196,8 +196,10 @@ void sign()
     string entry, aux;
 
     long long n, d;
+    int blockLength = 0;
     vector<long long> msgInRSA;
     vector<int> msgReversed;
+    vector<long long> signature;
 
     cout << "Informe a mensagem: ";
     cin >> entry;
@@ -208,24 +210,56 @@ void sign()
     cout << "Informe o N para assinar: ";
     cin >> n;
 
+    while (stoll(aux + "25") < n)
+    {
+        blockLength++;
+        aux += "25";
+    }
+
     string enc = encode(entry);
-    cout << enc << endl;
+    cout << "Mensagem encoded: " << enc << endl;
 
-    // Mensagem enc é assinada
-    long long signature = modPow(stoi(enc), d, n);
+    for (int i = 0; i < enc.length();)
+    {
+        aux = "";
 
-    cout << "Assinatura: " << signature << endl;
+        int j = 0;
+        while (j < blockLength && i < enc.length())
+        {
+            aux += enc[i];
+            aux += enc[i + 1];
+            i += 2;
+            j++;
+        }
+
+        cout << aux << endl;
+
+        signature.push_back(modPow(stoll(aux), d, n));
+        j = 0;
+    }
+
+    cout << "Assinatura: ";
+    for(auto num : signature){
+        cout << num << " ";
+    }
+    cout << endl;
 }
 
 void validateSign()
 {
-    string entry, sign;
-
+    string sign, aux;
+    vector<string> entry;
+    int blockLength = 0;
     long long n, e, d;
 
+    string msg;
+    cout << "Informe a mensagem assinada separando as cifras por espaco, para finalizar a entrada digite -1: ";
+    while (cin >> msg && msg != "-1")
+    {
+        entry.push_back(msg);
+    }
+
     cout << "Informe a mensagem esperada: ";
-    cin >> entry;
-    cout << "Informe a mensagem assinada: ";
     cin >> sign;
 
     cout << "Informe o e para verificar a assinatura: ";
@@ -233,14 +267,28 @@ void validateSign()
     cout << "Informe o n para verificar a assinatura: ";
     cin >> n;
 
-    string hash = encode(entry);
+    while (stoll(aux + "25") < n)
+    {
+        blockLength++;
+        aux += "25";
+    }
+
+    string hash = encode(sign);
     cout << "Hash esperado " << hash << endl;
     // Mensagem entry é assinada
-    long long hashSign = modPow(stoi(sign), e, n);
+    string hashSign = "";
+    for(auto num : entry){
+        string hashAux = to_string(modPow(stoi(num), e, n));
+        int qtdZero = 0;
+        if(hashAux.length() < blockLength * 2){
+            qtdZero = blockLength * 2 - hashAux.length();
+        }
+        hashSign += hashAux.insert(0, qtdZero, '0');
+    }
 
     cout << "Hash da assinatura " << hashSign << endl;
 
-    string valid = (hash == to_string(hashSign)) ? "Sim!" : "Nao!";
+    string valid = (hash == hashSign) ? "Sim!" : "Nao!";
 
     cout << "Assinatura valida: " << valid;
 }
@@ -249,6 +297,7 @@ void generateMessage()
 {
     string entry, aux;
     long long n, e;
+    int blockLength = 0;
     vector<long long> msgInRSA;
 
     cout << "Informe o e: ";
@@ -258,17 +307,35 @@ void generateMessage()
     cout << "Informe a mensagem: ";
     cin >> entry;
 
+    while (stoll(aux + "25") < n)
+    {
+        blockLength++;
+        aux += "25";
+    }
+
     string enc = encode(entry);
     cout << "Mensagem encodada: " << enc << endl;
     // Mensagem entry é criptografada
-    for (int i = 0; i < enc.length(); i += 2)
+    for (int i = 0; i < enc.length();)
     {
-        aux += enc[i];
-        aux += enc[i + 1];
+        aux = "";
+
+        int j = 0;
+        while (j < blockLength && i < enc.length())
+        {
+            aux += enc[i];
+            aux += enc[i + 1];
+            i += 2;
+            j++;
+        }
+
+        while (aux.length() != blockLength * 2)
+        {
+            aux += "25";
+        }
 
         msgInRSA.push_back(modPow(stoi(aux), e, n));
-
-        aux = "";
+        j = 0;
     }
 
     // Apenas demonstrativo
