@@ -215,7 +215,9 @@ void sign() {
             j++;
         }
 
-        cout << aux << endl;
+        while (aux.length() != blockLength * 2){
+            aux += "25";
+        }
 
         signature.push_back(modPow(stoll(aux), d, n));
         j = 0;
@@ -257,7 +259,29 @@ void validateSign()
     }
 
     string hash = encode(sign);
-    cout << "Hash esperado " << hash << endl;
+    string hashEsperado = "";
+    for (int i = 0; i < hash.length();)
+    {
+        aux = "";
+
+        int j = 0;
+        while (j < blockLength && i < hash.length())
+        {
+            aux += hash[i];
+            aux += hash[i + 1];
+            i += 2;
+            j++;
+        }
+
+        while (aux.length() != blockLength * 2){
+            aux += "25";
+        }
+
+        hashEsperado += aux;
+        j = 0;
+    }
+
+    cout << "Hash esperado " << hashEsperado << endl;
     // Mensagem entry é assinada
     string hashSign = "";
     for(auto num : entry){
@@ -271,7 +295,7 @@ void validateSign()
 
     cout << "Hash da assinatura " << hashSign << endl;
 
-    string valid = (hash == hashSign) ? "Sim!" : "Nao!";
+    string valid = (hashEsperado == hashSign) ? "Sim!" : "Nao!";
 
     cout << "Assinatura valida: " << valid;
 }
