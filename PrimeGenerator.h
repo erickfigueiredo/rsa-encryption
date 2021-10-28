@@ -15,9 +15,9 @@ using namespace std;
 int genRandomNumberOfNBits(int n) {
     int min = pow(2, n - 2) + 1;
     min *= 1.2; // Vamos aumentar o mínimo em 20% reduzindo o intervalo
-    int range = pow(2, n-1) - 1 - min;
+    int range = pow(2, n - 1) - 1 - min;
 
-    return (rand() % range+1) + min;
+    return (rand() % range + 1) + min;
 }
 
 /*

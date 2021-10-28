@@ -33,12 +33,11 @@ string decode(vector<string>& entry) {
     string decodedEntry;
 
     for (auto block : entry) {
-        for(int i = 0; i < block.length(); i+= 2){
+        for (int i = 0; i < block.length(); i += 2) {
             string pos = block.substr(i, 2);
             (stoi(pos) > 25) ? decodedEntry += pos : decodedEntry += alphabet[stoi(pos)];
         }
     }
-        
 
     return decodedEntry;
 }

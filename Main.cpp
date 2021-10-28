@@ -10,14 +10,13 @@
 using namespace std;
 
 void encoding();
-void encodingRead(long long &n, long long &e, long long &d);
+void encodingRead(long long& n, long long& e, long long& d);
 void decoding();
 void sign();
 void validateSign();
 void generateMessage();
 
-int main()
-{
+int main() {
     //Inicializa a semente da função aleatória
     srand(time(0));
 
@@ -26,8 +25,7 @@ int main()
     int option;
     cin >> option;
 
-    switch (option)
-    {
+    switch (option)     {
     case 1:
         encoding();
         break;
@@ -48,8 +46,7 @@ int main()
     return 0;
 }
 
-void encoding()
-{
+void encoding() {
     string entry, aux = "";
     long long n, e, d, cod;
     vector<long long> msgInRSA;
@@ -60,8 +57,7 @@ void encoding()
     cout << "Gostaria de gerar n, e, d? 0) Nao - 1) Sim" << endl;
     cin >> option;
 
-    switch (option)
-    {
+    switch (option)     {
     case 1:
         genKeys(n, e, d);
         break;
@@ -73,8 +69,7 @@ void encoding()
         break;
     }
 
-    while (stoll(aux + "25") < n)
-    {
+    while (stoll(aux + "25") < n)     {
         blockLength++;
         aux += "25";
     }
@@ -87,21 +82,18 @@ void encoding()
     string nString = to_string(n);
     cout << "Mensagem encodada: " << enc << endl;
     // Mensagem entry é criptografada
-    for (int i = 0; i < enc.length();)
-    {
+    for (int i = 0; i < enc.length();)     {
         aux = "";
 
         int j = 0;
-        while (j < blockLength && i < enc.length())
-        {
+        while (j < blockLength && i < enc.length())         {
             aux += enc[i];
             aux += enc[i + 1];
             i += 2;
             j++;
         }
 
-        while (aux.length() != blockLength * 2)
-        {
+        while (aux.length() != blockLength * 2)         {
             aux += "25";
         }
 
@@ -116,12 +108,10 @@ void encoding()
     cout << endl;
 
     // Mensagem é descriptografada
-    for (auto num : msgInRSA)
-    {
+    for (auto num : msgInRSA)     {
         string reverse = to_string(modPow(num, d, n));
         int qtdZero = 0;
-        if (blockLength * 2 > reverse.length())
-        {
+        if (blockLength * 2 > reverse.length())         {
             qtdZero = blockLength * 2 - reverse.length();
         };
 
@@ -132,8 +122,7 @@ void encoding()
     cout << "Mensagem descriptografada: " << decode(msgReversed) << endl;
 }
 
-void encodingRead(long long &n, long long &e, long long &d)
-{
+void encodingRead(long long& n, long long& e, long long& d) {
     cout << "Informe a chave privada: ";
     cin >> d;
 
@@ -146,8 +135,7 @@ void encodingRead(long long &n, long long &e, long long &d)
     return;
 }
 
-void decoding()
-{
+void decoding() {
     long long d, n;
     int blockLength = 0;
     string aux = "";
@@ -156,8 +144,7 @@ void decoding()
 
     string entry;
     cout << "Informe a mensagem criptografada separando as cifras por espaco, para finalizar a entrada digite -1: ";
-    while (cin >> entry && entry != "-1")
-    {
+    while (cin >> entry && entry != "-1")     {
         msg.push_back(stoi(entry));
     }
 
@@ -167,20 +154,17 @@ void decoding()
     cout << "informe o N: ";
     cin >> n;
 
-    while (stoll(aux + "25") < n)
-    {
+    while (stoll(aux + "25") < n)     {
         blockLength++;
         aux += "25";
     }
 
     string nString = to_string(n);
-    for (auto num : msg)
-    {
+    for (auto num : msg)     {
         string reverse = to_string(modPow(num, d, n));
 
         int qtdZero = 0;
-        if (blockLength * 2 > reverse.length())
-        {
+        if (blockLength * 2 > reverse.length())         {
             qtdZero = blockLength * 2 - reverse.length();
         };
 
@@ -191,8 +175,7 @@ void decoding()
     cout << "Mensagem descriptografada: " << decode(msgReversed) << endl;
 }
 
-void sign()
-{
+void sign() {
     string entry, aux;
 
     long long n, d;
@@ -293,8 +276,7 @@ void validateSign()
     cout << "Assinatura valida: " << valid;
 }
 
-void generateMessage()
-{
+void generateMessage() {
     string entry, aux;
     long long n, e;
     int blockLength = 0;

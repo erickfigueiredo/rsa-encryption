@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-void genKeys(long long &a, long long &b, long long &c) {
+void genKeys(long long& a, long long& b, long long& c) {
 
     // Teremos dois números, variando de 2^(n-2)+1 à 2^(n-1)-1
     int p = genPrimeOfNBits(17);
