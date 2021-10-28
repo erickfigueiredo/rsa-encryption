@@ -2,7 +2,7 @@
 #define TRANSCRIPTOR_MESSAGE
 
 #include <map>
-
+#include <string>
 using namespace std;
 
 string encode(const string& entry) {
@@ -26,13 +26,19 @@ string encode(const string& entry) {
     return entry;
 }
 
-string decode(const vector<int>& entry) {
+string decode(vector<string>& entry) {
     const char alphabet[] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
     'U', 'V', 'W', 'X', 'Y', 'Z' };
 
     string decodedEntry;
 
-    for (const int i : entry) decodedEntry += alphabet[i];
+    for (auto block : entry) {
+        for(int i = 0; i < block.length(); i+= 2){
+            string pos = block.substr(i, 2);
+            (stoi(pos) > 25) ? decodedEntry += pos : decodedEntry += alphabet[stoi(pos)];
+        }
+    }
+        
 
     return decodedEntry;
 }
