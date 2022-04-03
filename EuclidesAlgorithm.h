@@ -2,6 +2,8 @@
 #define EUCLIDES_ALGORITHM
 
 long long euclidesDefault(long long n1, long long n2) {
+    if(!n2) return 1;
+    
     long long res = n1 % n2;
 
     if (res == 1) return res;// Poupa +1 chamada desnecessária
